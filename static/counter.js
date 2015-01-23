@@ -12,12 +12,4 @@ counterSocket.onmessage = function(evt) {
     console.log(evt);
     blob = evt.data;
     counterSpan.textContent = evt.data;
-
-    // Wait a few seconds before incrementing. Increasing the visitors
-    // constantly isn't accurate.
-    setTimeout(sendMessage, 2000);
 };
-
-function sendMessage() {
-    counterSocket.send('ping');
-}

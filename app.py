@@ -3,6 +3,7 @@ from flask_sockets import Sockets
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
 from random import randint
+from time import sleep
 
 app = Flask(__name__)
 sockets = Sockets(app)
@@ -12,11 +13,11 @@ def echo_socket(ws):
     # Serve up fake visitors
     visitorCounter = randint(5000, 10000)
     while True:
-        message = ws.receive()
         ws.send(str(visitorCounter))
 
         # Assume that the site is gaining viewers as we monitor it
         visitorCounter += randint(1, 10)
+        sleep(randint(0, 5))
 
 @app.route('/')
 @app.route('/index')
